@@ -1,0 +1,73 @@
+repos:
+  # === SECRETS DETECTION ===
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.22.0
+    hooks:
+      - id: gitleaks
+        name: "Detect Hardcoded Secrets"
+        description: "Prevents committing API keys and secrets."
+
+  # === SECURITY AUDIT ===
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.9.4
+    hooks:
+      - id: bandit
+        name: "Audit Python Security"
+        description: "Catches exec(), risky deserialization, and SQL injections."
+        args: ["-c", "pyproject.toml", "-r", "src"]
+        additional_dependencies: ["bandit[toml]"]
+
+  # === DOCSTRING VALIDATION ===
+  - repo: https://github.com/jsh9/pydoclint
+    rev: 0.8.3
+    hooks:
+      - id: pydoclint
+        name: "Validate Docstring Args"
+        args:
+          - "--style=google"
+          - "--check-return-types=False"
+          - "--arg-type-hints-in-docstring=False"
+          - "--skip-checking-raises=True"
+          - "--allow-init-docstring=True"
+        exclude: ^(tests/)
+
+  # === LINTING & FORMATTING ===
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.0
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
+
+  # === STANDARD FILE CHECKS ===
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-json
+      - id: check-yaml
+        args: [--unsafe]
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: check-toml
+      - id: check-added-large-files
+        args: ["--maxkb=5000"]
+
+  # === PROJECT-SPECIFIC ===
+  - repo: local
+    hooks:
+      - id: mypy
+        name: "Type Check (Mypy)"
+        entry: uv run python -m mypy src/
+        language: system
+        types: [python]
+        files: ^src/
+        pass_filenames: false
+        require_serial: true
+      - id: ban-loguru-f-strings
+        name: "Ban f-strings in Loguru"
+        description: "Enforce lazy logging: Use logger.info('User {}', user) instead of f-strings."
+        entry: 'logger\.(trace|debug|info|success|warning|error|critical)\(\s*f["\x27]'
+        language: pygrep
+        types: [python]
+        exclude: ^(tests/|scripts/)
