@@ -1,12 +1,19 @@
-# AGENTS.md -- TODO: Project Name
+# AGENTS.md — Open Specification Template for Python
 
 > This file is the canonical source of agent instructions. All AI coding
 > assistants (Claude Code, Cursor, Copilot, etc.) should read this file.
+>
+> For tools that use `CLAUDE.md` or `.cursorrules`, create a symlink or
+> pointer to this file.
+
+**This project follows the [Open Specification](OPENSPEC.md) methodology.
+Read OPENSPEC.md for the runtime protocol that governs all work in this
+repository.**
 
 ## Project Overview
 
-<!-- TODO: Replace with 2-3 sentence project description -->
-<!-- TODO: What does this project do? What problem does it solve? -->
+This is the Open Specification Template for Python. See `spec/` for the
+product specification.
 
 ## Quick Reference
 
@@ -31,16 +38,21 @@ uv run mypy src/                     # Type check
 | `src/my_project/services/` | External integrations and business logic |
 | `tests/unit/` | Fast tests, no external dependencies |
 | `tests/integration/` | Tests requiring external services |
+| `spec/` | Open Specification documents (product, architecture, spec, roadmap) |
 | `docs/` | Proposals, plans, learnings, decisions |
 
 ## Development Workflow: Compound Engineering
 
-Every significant change follows: **Research -> Plan -> Implement -> Retro -> Codify**
+Every significant change follows the **GitOps Loop** defined in OPENSPEC.md Section 3:
+**Issue → Branch → Implement → Verify → PR → Review → Merge → Compound**
+
+Within each implementation cycle, use compound engineering:
+**Research -> Plan -> Implement -> Retro -> Codify**
 
 1. **Proposal** (`docs/proposals/NNN-title.md`) -- What and why
 2. **Plan** (`docs/plans/NNN-title.md`) -- How, step by step
 3. **Implementation** -- Code the plan, PR references proposal + plan
-4. **Retrospective** (`docs/learnings/by-proposal/NNN-retro.md`) -- What we learned
+4. **Retrospective** (`docs/learnings/by-issue/NNN-retro.md`) -- What we learned
 5. **Codify** -- Update AGENTS.md, patterns, or decisions as needed
 
 Small fixes and bug fixes skip this process. Use judgment: if it touches
@@ -110,10 +122,9 @@ architecture or takes > 1 hour, write a proposal first.
 
 ## Key Files
 
-<!-- TODO: Update as project grows -->
-
 | File | Purpose |
 |------|---------|
+| `OPENSPEC.md` | Runtime methodology — how this project operates |
 | `pyproject.toml` | Dependencies, build config, tool settings |
 | `src/my_project/config.py` | All configuration (Pydantic Settings) |
 | `src/my_project/models/example.py` | Golden example: Pydantic model pattern |

@@ -21,7 +21,7 @@ Research --> Plan --> Implement --> Retro --> Codify
 |----------|----------|------|
 | Proposal | `docs/proposals/NNN-title.md` | New features, refactors, architecture changes (>1 day) |
 | Plan | `docs/plans/NNN-title.md` | Complex implementations (>3 tasks) |
-| Retro | `docs/learnings/by-proposal/NNN-retro.md` | After completing proposals |
+| Retro | `docs/learnings/by-issue/NNN-retro.md` | After completing proposals |
 | Pattern | `docs/learnings/patterns/` | When a reusable pattern emerges |
 | Decision | `docs/decisions/NNN-title.md` | Significant architectural choices |
 

@@ -1,38 +1,71 @@
-# my-project
+# Open Specification Template for Python
 
-<!-- TODO: Project description -->
+A GitHub Template Repository for building Python software from a natural language
+specification using AI coding agents.
+
+Write what you want built in plain language. Open a Bootstrap Issue. Assign it to
+an AI agent. The agent reads your specification and builds it.
 
 ## Quick Start
 
-```bash
-# Prerequisites: Python 3.13+, uv (https://docs.astral.sh/uv/)
+1. **Use this template** — click "Use this template" on GitHub (or clone locally)
+2. **Write your specification** — fill in the four documents in `spec/`:
+   - `spec/PRODUCT.md` — what and why
+   - `spec/ROADMAP.md` — in what order
+   - `spec/ARCHITECTURE.md` — how it's structured
+   - `spec/SPECIFICATION.md` — what it must do
+3. **Open a Bootstrap Issue** — use the Bootstrap issue template to initialize your project
+4. **Assign to an agent** — assign the issue to Copilot, run it with Claude Code, or use your preferred AI coding agent
+5. **Review and merge** — the agent opens a PR; you review and merge
 
-# Install
-git clone <repo-url>
-cd my-project
-uv sync
+See the [Writing Guide](https://github.com/davidgibsonp/open-specification/blob/main/docs/writing-guide.md)
+for advice on writing effective specifications.
 
-# Configure
-cp .env.example .env
-# Edit .env with your values
+## What's Included
 
-# Install pre-commit hooks
-uv run pre-commit install
+| Component | Purpose |
+|-----------|---------|
+| `spec/` | Placeholder specification documents |
+| `OPENSPEC.md` | Runtime methodology governing all work |
+| `AGENTS.md` | Agent instructions and project conventions |
+| `.github/ISSUE_TEMPLATE/` | Bootstrap, Implementation, Bug Fix, Compound Learning templates |
+| `.github/workflows/` | CI/CD (pre-commit checks, release automation) |
+| `Makefile` | Verification targets (`test`, `lint`, `format`, `type-check`, `pre-commit`) |
+| `src/my_project/` | Placeholder Python package (bootstrap renames this) |
+| `tests/` | Unit and integration test infrastructure |
+| `docs/` | Compound engineering artifacts (proposals, plans, learnings, decisions) |
 
-# Verify
-uv run pytest tests/ -v
-```
+## Prerequisites
+
+- Python 3.13+
+- [uv](https://docs.astral.sh/uv/) package manager
+- GitHub account
 
 ## Development
 
-See [DEVELOPMENT.md](DEVELOPMENT.md) for the full development guide.
-
-See [AGENTS.md](AGENTS.md) for AI assistant instructions.
-
 ```bash
-make setup    # Install deps + pre-commit + .env
-make test     # Run all tests
-make lint     # Lint with ruff
-make format   # Format with ruff
+make setup       # Install deps + pre-commit hooks + .env
+make test        # Run all tests
+make lint        # Lint with ruff
+make format      # Format with ruff
+make type-check  # Type check with mypy
 make pre-commit  # Run all quality checks
 ```
+
+See [AGENTS.md](AGENTS.md) for full development conventions and mandatory rules.
+
+## Methodology
+
+This template implements the [Open Specification](https://github.com/davidgibsonp/open-specification)
+standard. Read [OPENSPEC.md](OPENSPEC.md) for the complete runtime protocol that
+governs how projects built from this template operate.
+
+## GitHub Template Setup
+
+To use this as a template repository, go to **Settings → General** and check
+**Template repository**. This allows others to create new repositories from this
+template using the "Use this template" button.
+
+## License
+
+<!-- TODO: Choose a license -->
