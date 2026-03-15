@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import pytest
 
-from my_project.models.example import ExampleItem
+from openspec_python_template.models.example import ExampleItem
 
 
 @pytest.mark.unit

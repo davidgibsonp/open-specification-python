@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from my_project.config import Settings
+from openspec_python_template.config import Settings
 
 
 @pytest.fixture
