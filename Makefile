@@ -18,7 +18,7 @@ test-integration: ## Run integration tests only
 	uv run pytest tests/integration/ -v -m integration
 
 test-cov: ## Run tests with coverage report
-	uv run pytest tests/ --cov=src/openspec_python_template --cov-report=term-missing
+	uv run pytest tests/ --cov=src/my_project --cov-report=term-missing
 
 lint: ## Lint with ruff
 	uv run ruff check src/ tests/
