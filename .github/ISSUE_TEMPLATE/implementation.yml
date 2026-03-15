@@ -1,7 +1,7 @@
 ---
 name: "Implementation"
 description: Implement a feature, phase, or enhancement defined in the specification
-title: ""
+title: "Implementation: "
 labels: ["implementation"]
 body:
   - type: markdown
