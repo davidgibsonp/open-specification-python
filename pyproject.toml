@@ -3,12 +3,12 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/my_project"]
+packages = ["src/openspec_python_template"]
 
 [project]
-name = "my-project"
+name = "openspec-python-template"
 version = "0.1.0"
-description = "TODO: Project description"
+description = "Template for open spec projects in python"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -18,7 +18,7 @@ dependencies = [
 ]
 
 [project.scripts]
-# my-project = "my_project.main:main"
+# openspec-python-template = "openspec_python_template.main:main"
 
 [tool.uv]
 package = true

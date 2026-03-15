@@ -34,7 +34,7 @@ can skip the full process. Use a standard PR with a clear description.
 
 ```bash
 git clone <repo-url>
-cd my-project
+cd openspec-python-template
 make setup
 ```
 

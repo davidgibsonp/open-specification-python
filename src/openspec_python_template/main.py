@@ -1,4 +1,4 @@
-"""Entry point for my_project."""
+"""Entry point for openspec_python_template."""
 
 from __future__ import annotations
 
@@ -28,11 +28,11 @@ def setup_logging(level: str = "INFO") -> None:
 
 def main() -> None:
     """Application entry point."""
-    from my_project.config import get_settings
+    from openspec_python_template.config import get_settings
 
     settings = get_settings()
     setup_logging(settings.log_level)
-    logger.info("Starting my_project v{}", "0.1.0")
+    logger.info("Starting openspec_python_template v{}", "0.1.0")
     # TODO: Application logic here
 
 

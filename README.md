@@ -25,13 +25,13 @@ for advice on writing effective specifications.
 
 | Component | Purpose |
 |-----------|---------|
-| `spec/` | Placeholder specification documents |
+| `spec/` | Open Specification documents (PRODUCT.md, ARCHITECTURE.md, SPECIFICATION.md, ROADMAP.md) |
 | `OPENSPEC.md` | Runtime methodology governing all work |
 | `AGENTS.md` | Agent instructions and project conventions |
 | `.github/ISSUE_TEMPLATE/` | Bootstrap, Implementation, Bug Fix, Compound Learning templates |
 | `.github/workflows/` | CI/CD (pre-commit checks, release automation) |
 | `Makefile` | Verification targets (`test`, `lint`, `format`, `type-check`, `pre-commit`) |
-| `src/my_project/` | Placeholder Python package (bootstrap renames this) |
+| `src/openspec_python_template/` | Python package structure with Pydantic config |
 | `tests/` | Unit and integration test infrastructure |
 | `docs/` | Compound engineering artifacts (proposals, plans, learnings, decisions) |
 
@@ -54,6 +54,33 @@ make pre-commit  # Run all quality checks
 
 See [AGENTS.md](AGENTS.md) for full development conventions and mandatory rules.
 
+## Project Structure
+
+```
+.
+├── spec/                           # Open Specification documents
+│   ├── PRODUCT.md                  # What we're building and why
+│   ├── ARCHITECTURE.md             # System structure and design decisions
+│   ├── SPECIFICATION.md            # Detailed functional requirements
+│   └── ROADMAP.md                  # Phased construction plan
+├── src/openspec_python_template/   # Python package
+│   ├── config.py                   # Pydantic Settings configuration
+│   ├── main.py                     # Application entry point
+│   ├── models/                     # Domain models (Pydantic)
+│   └── services/                   # External integrations and business logic
+├── tests/                          # Test suite
+│   ├── unit/                       # Fast tests, no external dependencies
+│   └── integration/                # Tests requiring external services
+├── docs/                           # Compound engineering artifacts
+│   ├── learnings/                  # Knowledge captured from development
+│   ├── decisions/                  # Architecture Decision Records
+│   ├── proposals/                  # Change proposals
+│   └── plans/                      # Implementation plans
+├── OPENSPEC.md                     # Open Specification runtime methodology
+├── AGENTS.md                       # Agent instructions
+└── pyproject.toml                  # Project configuration
+```
+
 ## Methodology
 
 This template implements the [Open Specification](https://github.com/davidgibsonp/open-specification)
@@ -68,4 +95,4 @@ template using the "Use this template" button.
 
 ## License
 
-<!-- TODO: Choose a license -->
+MIT

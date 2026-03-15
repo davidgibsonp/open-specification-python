@@ -28,14 +28,14 @@ uv run mypy src/                     # Type check
 
 ## Architecture
 
-<!-- TODO: Replace with actual architecture -->
+
 
 | Directory | Purpose |
 |-----------|---------|
-| `src/my_project/config.py` | Pydantic settings, all config via env vars |
-| `src/my_project/main.py` | Application entry point |
-| `src/my_project/models/` | Domain models (Pydantic) |
-| `src/my_project/services/` | External integrations and business logic |
+| `src/openspec_python_template/config.py` | Pydantic settings, all config via env vars |
+| `src/openspec_python_template/main.py` | Application entry point |
+| `src/openspec_python_template/models/` | Domain models (Pydantic) |
+| `src/openspec_python_template/services/` | External integrations and business logic |
 | `tests/unit/` | Fast tests, no external dependencies |
 | `tests/integration/` | Tests requiring external services |
 | `spec/` | Open Specification documents (product, architecture, spec, roadmap) |
@@ -103,8 +103,8 @@ architecture or takes > 1 hour, write a proposal first.
 
 ### Configuration
 
-- All config via `pydantic-settings` in `src/my_project/config.py`
-- Environment variable prefix: `MY_PROJECT_` <!-- TODO: customize -->
+- All config via `pydantic-settings` in `src/openspec_python_template/config.py`
+- Environment variable prefix: `OPENSPEC_`
 - `.env` file for local development, `.env.example` committed as template
 
 ## Anti-patterns (Do Not Do)
@@ -126,8 +126,8 @@ architecture or takes > 1 hour, write a proposal first.
 |------|---------|
 | `OPENSPEC.md` | Runtime methodology — how this project operates |
 | `pyproject.toml` | Dependencies, build config, tool settings |
-| `src/my_project/config.py` | All configuration (Pydantic Settings) |
-| `src/my_project/models/example.py` | Golden example: Pydantic model pattern |
+| `src/openspec_python_template/config.py` | All configuration (Pydantic Settings) |
+| `src/openspec_python_template/models/example.py` | Golden example: Pydantic model pattern |
 | `tests/unit/test_example.py` | Golden example: test pattern |
 | `.env.example` | Template for required environment variables |
 
@@ -136,7 +136,7 @@ architecture or takes > 1 hour, write a proposal first.
 ```bash
 # Clone and install
 git clone <repo-url>
-cd my-project
+cd openspec-python-template
 make setup
 
 # Or manually:
@@ -152,7 +152,7 @@ uv run pre-commit run --all-files
 
 ## Common Issues
 
-<!-- TODO: Add project-specific issues as they arise -->
+
 
 **`uv sync` fails**
 Check Python version: `python --version` should be 3.13+. Install via `uv python install 3.13`.
@@ -165,5 +165,3 @@ Run `uv run pre-commit install` then `uv run pre-commit run --all-files` to init
 Architectural decisions are recorded in `docs/decisions/`. When making a
 decision that affects project structure, dependencies, or patterns, create
 a new file: `docs/decisions/NNN-title.md`.
-
-<!-- TODO: Add project-specific decisions as they are made -->
