@@ -82,3 +82,16 @@ markers = [
     "integration: Integration tests (may require external services)",
     "e2e: End-to-end tests (full system)",
 ]
+
+[tool.coverage.run]
+source = ["src/my_project"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 80
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+]
