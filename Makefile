@@ -17,8 +17,8 @@ test-unit: ## Run unit tests only
 test-integration: ## Run integration tests only
 	uv run pytest tests/integration/ -v -m integration
 
-test-cov: ## Run tests with coverage (fails if below threshold in pyproject.toml)
-	uv run pytest tests/ --cov=src/my_project --cov-report=term-missing --cov-fail-under=$$(grep -A10 '\[tool\.coverage\.report\]' pyproject.toml | grep 'fail_under' | head -1 | sed 's/.*=\s*//' | tr -d ' ' || echo 80)
+test-cov: ## Run tests with coverage (fails if below 80% threshold)
+	uv run pytest tests/ --cov --cov-report=term-missing --cov-fail-under=80
 
 lint: ## Lint with ruff
 	uv run ruff check src/ tests/

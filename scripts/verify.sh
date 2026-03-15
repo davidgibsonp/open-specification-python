@@ -55,6 +55,32 @@ get_coverage_threshold() {
 
 COVERAGE_THRESHOLD=$(get_coverage_threshold)
 
+# Detect the source package directory dynamically
+# Look for single directory under src/ (standard Python project layout)
+get_source_package() {
+    if [ -d "src" ]; then
+        local pkg
+        pkg=$(find src -mindepth 1 -maxdepth 1 -type d ! -name '__pycache__' | head -1)
+        if [ -n "$pkg" ]; then
+            echo "$pkg"
+            return
+        fi
+    fi
+    # Fallback to reading from pyproject.toml [tool.coverage.run] source
+    if [ -f "pyproject.toml" ]; then
+        local source
+        source=$(grep -A5 '\[tool\.coverage\.run\]' pyproject.toml | grep 'source' | head -1 | sed 's/.*\["\([^"]*\)"\].*/\1/')
+        if [ -n "$source" ]; then
+            echo "$source"
+            return
+        fi
+    fi
+    # Default fallback
+    echo "src/my_project"
+}
+
+SOURCE_PACKAGE=$(get_source_package)
+
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -149,7 +175,7 @@ print_result "Mypy Type Check" "$MYPY_STATUS" "$MYPY_OUTPUT"
 # ============================================================================
 print_header "Pytest with Coverage"
 
-TEST_OUTPUT=$(uv run pytest tests/ --cov=src/my_project --cov-report=term-missing --cov-fail-under="$COVERAGE_THRESHOLD" -v 2>&1)
+TEST_OUTPUT=$(uv run pytest tests/ --cov="$SOURCE_PACKAGE" --cov-report=term-missing --cov-fail-under="$COVERAGE_THRESHOLD" -v 2>&1)
 TEST_STATUS=$?
 
 # Even if tests pass, coverage might be below threshold
