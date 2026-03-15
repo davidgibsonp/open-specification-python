@@ -17,4 +17,28 @@ jobs:
       - name: Install dependencies
         run: uv sync --group dev
       - name: Run pre-commit
+        id: pre-commit
         run: uv run pre-commit run --all-files --show-diff-on-failure
+        continue-on-error: true
+      - name: Structured failure summary
+        if: steps.pre-commit.outcome == 'failure'
+        run: |
+          echo "═══════════════════════════════════════════════════════════════════════════════"
+          echo "PRE-COMMIT VERIFICATION FAILED"
+          echo "═══════════════════════════════════════════════════════════════════════════════"
+          echo ""
+          echo "One or more pre-commit hooks failed. Review the output above to identify:"
+          echo ""
+          echo "1. WHICH HOOK FAILED - Look for 'Failed' status next to the hook name"
+          echo "2. WHAT THE ERROR IS - Error output appears after each failed hook"
+          echo "3. HOW TO FIX - See AGENTS.md 'Self-Healing Protocol' section"
+          echo ""
+          echo "Common fixes:"
+          echo "  - Ruff lint errors:    uv run ruff check --fix src/ tests/"
+          echo "  - Ruff format errors:  uv run ruff format src/ tests/"
+          echo "  - Mypy type errors:    Check type hints and imports"
+          echo "  - Docstring errors:    Ensure Google-style docstrings match function signatures"
+          echo ""
+          echo "Re-run locally with: make pre-commit"
+          echo "═══════════════════════════════════════════════════════════════════════════════"
+          exit 1

@@ -1,4 +1,4 @@
-.PHONY: setup test test-unit test-integration test-cov lint format type-check pre-commit clean help
+.PHONY: setup test test-unit test-integration test-cov lint format type-check pre-commit verify clean help
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
@@ -17,8 +17,8 @@ test-unit: ## Run unit tests only
 test-integration: ## Run integration tests only
 	uv run pytest tests/integration/ -v -m integration
 
-test-cov: ## Run tests with coverage report
-	uv run pytest tests/ --cov=src/my_project --cov-report=term-missing
+test-cov: ## Run tests with coverage (fails if below 80% threshold)
+	uv run pytest tests/ --cov --cov-report=term-missing --cov-fail-under=80
 
 lint: ## Lint with ruff
 	uv run ruff check src/ tests/
@@ -31,6 +31,9 @@ type-check: ## Run mypy type checking
 
 pre-commit: ## Run all pre-commit hooks
 	uv run pre-commit run --all-files
+
+verify: ## Run full verification suite with structured output
+	@./scripts/verify.sh
 
 clean: ## Remove build artifacts and caches
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true

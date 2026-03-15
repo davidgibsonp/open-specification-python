@@ -24,11 +24,10 @@ uv run ruff check src/ tests/        # Lint
 uv run ruff format src/ tests/       # Format
 uv run pre-commit run --all-files    # All quality checks
 uv run mypy src/                     # Type check
+make verify                          # Full verification with structured output
 ```
 
 ## Architecture
-
-
 
 | Directory | Purpose |
 |-----------|---------|
@@ -159,13 +158,20 @@ uv run pre-commit run --all-files
 
 ## Common Issues
 
-
-
 **`uv sync` fails**
 Check Python version: `python --version` should be 3.13+. Install via `uv python install 3.13`.
 
 **Pre-commit hooks fail on first run**
 Run `uv run pre-commit install` then `uv run pre-commit run --all-files` to initialize hook environments.
+
+## Self-Healing Protocol
+
+When verification fails, run `make verify` and use the structured output to diagnose issues.
+See `docs/self-healing.md` for detailed error codes, common patterns, and fix guidance.
+
+**Verification loop:** `make verify` → read output → fix issue → re-verify → repeat until pass.
+
+**Never open a PR with failing verification.**
 
 ## Decisions Log
 
