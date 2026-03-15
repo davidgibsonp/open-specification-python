@@ -3,20 +3,24 @@
 A GitHub Template Repository for building Python software from a natural language
 specification using AI coding agents.
 
-Write what you want built in plain language. Open a Bootstrap Issue. Assign it to
-an AI agent. The agent reads your specification and builds it.
+## What is Open Specification?
+
+[Open Specification](https://github.com/davidgibsonp/open-specification) is a
+methodology where you write what you want built in plain language, and AI coding
+agents implement it. This template provides the infrastructure to make that work.
 
 ## Quick Start
 
 1. **Use this template** — click "Use this template" on GitHub (or clone locally)
-2. **Write your specification** — fill in the four documents in `spec/`:
+2. **Rename your project** — run `bash scripts/rename_project.sh your_project_name`
+3. **Write your specification** — fill in the four documents in `spec/`:
    - `spec/PRODUCT.md` — what and why
    - `spec/ROADMAP.md` — in what order
    - `spec/ARCHITECTURE.md` — how it's structured
    - `spec/SPECIFICATION.md` — what it must do
-3. **Open a Bootstrap Issue** — use the Bootstrap issue template to initialize your project
-4. **Assign to an agent** — assign the issue to Copilot, run it with Claude Code, or use your preferred AI coding agent
-5. **Review and merge** — the agent opens a PR; you review and merge
+4. **Open a Bootstrap Issue** — use the Bootstrap issue template to initialize your project
+5. **Assign to an agent** — assign the issue to Copilot, run it with Claude Code, or use your preferred AI coding agent
+6. **Review and merge** — the agent opens a PR; you review and merge
 
 See the [Writing Guide](https://github.com/davidgibsonp/open-specification/blob/main/docs/writing-guide.md)
 for advice on writing effective specifications.
@@ -86,12 +90,6 @@ See [AGENTS.md](AGENTS.md) for full development conventions and mandatory rules.
 This template implements the [Open Specification](https://github.com/davidgibsonp/open-specification)
 standard. Read [OPENSPEC.md](OPENSPEC.md) for the complete runtime protocol that
 governs how projects built from this template operate.
-
-## GitHub Template Setup
-
-To use this as a template repository, go to **Settings → General** and check
-**Template repository**. This allows others to create new repositories from this
-template using the "Use this template" button.
 
 ## License
 

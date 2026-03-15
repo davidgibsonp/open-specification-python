@@ -12,8 +12,7 @@ repository.**
 
 ## Project Overview
 
-This is the Open Specification Template for Python. See `spec/` for the
-product specification.
+TODO: Project description. See `spec/` for the product specification.
 
 ## Quick Reference
 
