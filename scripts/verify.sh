@@ -111,7 +111,7 @@ extract_coverage() {
 
 echo -e "${BLUE}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${BLUE}║                        VERIFICATION SUITE                                     ║${NC}"
-echo -e "${BLUE}║                   Coverage Threshold: ${COVERAGE_THRESHOLD}%                                      ║${NC}"
+echo -e "${BLUE}║                   Coverage Threshold: ${COVERAGE_THRESHOLD}%${NC}"
 echo -e "${BLUE}╚═══════════════════════════════════════════════════════════════════════════════╝${NC}"
 
 # ============================================================================

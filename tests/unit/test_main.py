@@ -45,8 +45,8 @@ class TestMain:
         # The function ran without exception
 
     def test_main_logs_startup_message(self, capfd: pytest.CaptureFixture[str]) -> None:
-        """Main function logs startup message."""
+        """Main function logs startup message to stderr."""
         main()
         captured = capfd.readouterr()
-        # Startup message should be in stderr (loguru default)
-        assert "my_project" in captured.err or captured.out == ""
+        # Loguru writes to stderr by default, verify startup message is present
+        assert "my_project" in captured.err, "Expected 'my_project' in startup log message"
