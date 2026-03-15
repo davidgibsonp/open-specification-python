@@ -11,12 +11,12 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     """Application configuration.
 
-    All fields are read from environment variables prefixed with ``OPENSPEC_``
-    (e.g. ``OPENSPEC_DEBUG``) or from a ``.env`` file in the project root.
+    All fields are read from environment variables prefixed with ``MY_PROJECT_``
+    (e.g. ``MY_PROJECT_DEBUG``) or from a ``.env`` file in the project root.
     """
 
     model_config = SettingsConfigDict(
-        env_prefix="OPENSPEC_",
+        env_prefix="MY_PROJECT_",
         env_file=".env",
         env_file_encoding="utf-8",
     )
