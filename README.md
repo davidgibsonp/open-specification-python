@@ -31,7 +31,7 @@ for advice on writing effective specifications.
 | `.github/ISSUE_TEMPLATE/` | Bootstrap, Implementation, Bug Fix, Compound Learning templates |
 | `.github/workflows/` | CI/CD (pre-commit checks, release automation) |
 | `Makefile` | Verification targets (`test`, `lint`, `format`, `type-check`, `pre-commit`) |
-| `src/openspec_python_template/` | Python package structure with Pydantic config |
+| `src/my_project/` | Python package structure with Pydantic config |
 | `tests/` | Unit and integration test infrastructure |
 | `docs/` | Compound engineering artifacts (proposals, plans, learnings, decisions) |
 
@@ -63,7 +63,7 @@ See [AGENTS.md](AGENTS.md) for full development conventions and mandatory rules.
 │   ├── ARCHITECTURE.md             # System structure and design decisions
 │   ├── SPECIFICATION.md            # Detailed functional requirements
 │   └── ROADMAP.md                  # Phased construction plan
-├── src/openspec_python_template/   # Python package
+├── src/my_project/   # Python package
 │   ├── config.py                   # Pydantic Settings configuration
 │   ├── main.py                     # Application entry point
 │   ├── models/                     # Domain models (Pydantic)
