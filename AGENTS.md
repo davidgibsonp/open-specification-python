@@ -107,6 +107,13 @@ architecture or takes > 1 hour, write a proposal first.
 - Environment variable prefix: `MY_PROJECT_`
 - `.env` file for local development, `.env.example` committed as template
 
+### GitHub Issue Templates
+
+- **Always** provide a non-empty string for the `title` field in `.github/ISSUE_TEMPLATE/*.yml` files
+- GitHub silently hides templates with empty titles (`title: ""`) from the issues/new/choose UI
+- Use descriptive prefixes: `title: "Implementation: "`, `title: "Bug: "`, `title: "Compound Learning: "`
+- This is an undocumented GitHub platform quirk that cannot be detected by AI agents without user feedback
+
 ## Anti-patterns (Do Not Do)
 
 | Anti-pattern | Why | Instead |
