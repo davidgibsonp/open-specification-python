@@ -301,8 +301,10 @@ the Bootstrap Issue template. This Issue instructs the agent to:
 3. Update `pyproject.toml` with the project's metadata and dependencies
 4. Scaffold the directory structure defined in ARCHITECTURE.md
 5. Configure environment variables template from SPECIFICATION.md
-6. Create the initial Issue set from ROADMAP.md Phase 1
-7. Open a Pull Request with all scaffolding changes
+6. Create all labels referenced by issue templates (GitHub does not auto-create
+   labels from template YAML — the `labels:` field only applies existing labels)
+7. Create the initial Issue set from ROADMAP.md Phase 1
+8. Open a Pull Request with all scaffolding changes
 
 The human reviews and merges this PR. The project is now initialized and ready
 for Phase 1 development.
