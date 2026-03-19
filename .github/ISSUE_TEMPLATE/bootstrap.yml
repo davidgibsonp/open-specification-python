@@ -82,5 +82,6 @@ body:
         - label: "`pyproject.toml` reflects the project, not the template"
         - label: Directory structure matches `spec/ARCHITECTURE.md`
         - label: "`README.md` describes this project"
+        - label: All labels referenced by issue templates exist in the repo
         - label: All verification steps pass (`make pre-commit`)
         - label: Phase 1 Issues are created and reference the spec
