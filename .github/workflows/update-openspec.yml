@@ -1,0 +1,98 @@
+name: Update OPENSPEC.md
+
+on:
+  schedule:
+    # Run every Monday at 9:00 UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Get current version
+        id: current
+        run: |
+          VERSION=$(grep -oP '<!-- openspec-version: \K[0-9]+\.[0-9]+\.[0-9]+' OPENSPEC.md || echo "0.0.0")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Current version: $VERSION"
+
+      - name: Get latest release
+        id: latest
+        run: |
+          LATEST=$(curl -s https://api.github.com/repos/davidgibsonp/open-specification/releases/latest | jq -r '.tag_name // "v0.0.0"')
+          # Remove 'v' prefix if present
+          LATEST_VERSION=${LATEST#v}
+          echo "version=$LATEST_VERSION" >> $GITHUB_OUTPUT
+          echo "Latest version: $LATEST_VERSION"
+
+      - name: Compare versions
+        id: compare
+        run: |
+          CURRENT="${{ steps.current.outputs.version }}"
+          LATEST="${{ steps.latest.outputs.version }}"
+          
+          if [ "$CURRENT" != "$LATEST" ]; then
+            echo "update_needed=true" >> $GITHUB_OUTPUT
+            echo "Update needed: $CURRENT -> $LATEST"
+          else
+            echo "update_needed=false" >> $GITHUB_OUTPUT
+            echo "Already up to date at $CURRENT"
+          fi
+
+      - name: Download new OPENSPEC.md
+        if: steps.compare.outputs.update_needed == 'true'
+        run: |
+          LATEST_VERSION="${{ steps.latest.outputs.version }}"
+          TAG="v${LATEST_VERSION}"
+          
+          # Download OPENSPEC.md from the release tag
+          curl -sL "https://raw.githubusercontent.com/davidgibsonp/open-specification/$TAG/OPENSPEC.md" -o OPENSPEC.md.new
+          
+          # Verify the downloaded file has the correct version marker
+          if ! grep -q "<!-- openspec-version: $LATEST_VERSION -->" OPENSPEC.md.new; then
+            echo "Error: Downloaded OPENSPEC.md does not have expected version marker"
+            exit 1
+          fi
+          
+          # Replace the current file
+          mv OPENSPEC.md.new OPENSPEC.md
+
+      - name: Create Pull Request
+        if: steps.compare.outputs.update_needed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update OPENSPEC.md to v${{ steps.latest.outputs.version }}"
+          title: "Update OPENSPEC.md to v${{ steps.latest.outputs.version }}"
+          body: |
+            ## OPENSPEC.md Update Available
+            
+            This PR updates the Open Specification runtime from **v${{ steps.current.outputs.version }}** to **v${{ steps.latest.outputs.version }}**.
+            
+            ### Changes
+            - Updated OPENSPEC.md to match the [v${{ steps.latest.outputs.version }} release](https://github.com/davidgibsonp/open-specification/releases/tag/v${{ steps.latest.outputs.version }})
+            
+            ### Release Notes
+            See the [full release notes](https://github.com/davidgibsonp/open-specification/releases/tag/v${{ steps.latest.outputs.version }}) for details.
+            
+            ### Review Checklist
+            - [ ] Review the diff to understand what changed in the runtime
+            - [ ] Check if any project-specific adaptations are needed
+            - [ ] Ensure all verification steps pass
+            
+            ---
+            
+            *This PR was automatically created by the [update-openspec workflow](../.github/workflows/update-openspec.yml).*
+          branch: update-openspec-${{ steps.latest.outputs.version }}
+          delete-branch: true
+          labels: |
+            dependencies
+            documentation

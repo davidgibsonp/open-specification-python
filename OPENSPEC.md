@@ -1,4 +1,5 @@
 # OPENSPEC.md — The Open Specification Runtime
+<!-- openspec-version: 0.1.0 -->
 
 **Version:** 0.1.0
 **Status:** Draft

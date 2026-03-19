@@ -130,6 +130,7 @@ architecture or takes > 1 hour, write a proposal first.
 | File | Purpose |
 |------|---------|
 | `OPENSPEC.md` | Runtime methodology — how this project operates |
+| `.github/workflows/update-openspec.yml` | Automated OPENSPEC.md version updates |
 | `pyproject.toml` | Dependencies, build config, tool settings |
 | `src/my_project/config.py` | All configuration (Pydantic Settings) |
 | `src/my_project/models/example.py` | Golden example: Pydantic model pattern |
