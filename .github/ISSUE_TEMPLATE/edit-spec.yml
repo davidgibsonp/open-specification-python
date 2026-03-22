@@ -1,0 +1,110 @@
+---
+name: "Edit Specification"
+description: Create or revise specification documents in the spec/ directory
+title: "Spec: "
+labels: ["spec"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to create new specification documents or revise existing ones.
+
+        **For new specs**: Paste the complete document content below. The agent will
+        create the file in `spec/` and open a Pull Request.
+
+        **For revisions**: You can either provide the complete revised content to replace
+        the existing document, or describe the changes you want made and the agent will
+        open a PR for discussion.
+
+  - type: dropdown
+    id: action-type
+    attributes:
+      label: Action Type
+      description: Are you creating a new spec document or revising an existing one?
+      options:
+        - Create new spec document
+        - Revise existing spec document
+    validations:
+      required: true
+
+  - type: dropdown
+    id: spec-document
+    attributes:
+      label: Spec Document
+      description: |
+        Which spec document are you creating or editing? For new documents, select
+        the type that best matches your content.
+      options:
+        - PRODUCT.md
+        - ARCHITECTURE.md
+        - SPECIFICATION.md
+        - ROADMAP.md
+        - Other (specify in content)
+    validations:
+      required: true
+
+  - type: textarea
+    id: spec-content
+    attributes:
+      label: Spec Content
+      description: |
+        For **new specs**: Paste the complete document content here. Use the templates
+        in `spec/` as a guide for structure and format.
+
+        For **revisions with direct edits**: Paste the complete revised document here.
+        The agent will replace the existing content with this version.
+
+        For **revisions via PR discussion**: Describe the changes you want made in
+        detail. The agent will propose changes in a PR for your review.
+      placeholder: |
+        # Product Specification
+
+        ## Overview
+        [Your content here...]
+
+        ---
+        Or for revision requests:
+
+        Please make the following changes to SPECIFICATION.md:
+        1. Update Section 2.1 to include...
+        2. Add a new section for...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: revision-approach
+    attributes:
+      label: Revision Approach
+      description: |
+        How should the agent handle this change? Only applies to revisions.
+      options:
+        - Direct replacement (use content above as-is)
+        - PR for discussion (agent proposes changes based on description)
+    validations:
+      required: false
+
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale
+      description: |
+        Why is this change needed? What problem does it solve or what capability
+        does it add? This helps reviewers understand the context.
+      placeholder: |
+        Example:
+        - The current architecture doesn't account for caching, which is needed for
+          performance at scale
+        - Adding a new component for authentication per user feedback
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      value: |
+        - [ ] Spec document created or updated in `spec/`
+        - [ ] Document follows the standard structure and format
+        - [ ] All verification steps pass (`make pre-commit`)
+    validations:
+      required: true
